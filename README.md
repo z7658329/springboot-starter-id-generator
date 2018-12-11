@@ -1,6 +1,7 @@
 # springboot-starter-id-generator
 springboot-starter-id-generator
 第一版本参考雪花算法实现的java版本
+
 第二版规划：
       解决分布式服务ID生成器中的时钟回调问题（https://github.com/baidu/uid-generator/issues/10）
       
