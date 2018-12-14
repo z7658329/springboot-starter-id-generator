@@ -27,7 +27,12 @@ import org.springframework.beans.factory.InitializingBean;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class IdGeneratorFactoryBean implements FactoryBean<IdGenerator>, InitializingBean, DisposableBean {
+/**
+ * zookeeper版本
+ * 参考：https://github.com/twitter-archive/snowflake
+ * 或者美团的idleaf：https://github.com/zhuzhong/idleaf
+ */
+public class IdGeneratorZKFactory implements InitializingBean, DisposableBean {
 
     private String zkAddress;
     private String root;
@@ -79,21 +84,4 @@ public class IdGeneratorFactoryBean implements FactoryBean<IdGenerator>, Initial
     public void destroy() throws Exception {
         zooKeeper.close();
     }
-
-    @Override
-    public IdGenerator getObject() throws Exception {
-        return idGenerator;
-    }
-
-    @Override
-    public Class<IdGenerator> getObjectType() {
-        return IdGenerator.class;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return true;
-    }
-
-
 }
