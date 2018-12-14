@@ -31,9 +31,14 @@ public class IdGeneratorZKConfiguration {
     @Getter
     //配置的默认前缀
     /**
-     * 1.也可考虑使用jdbc-sharding中关于idkey的生成 使用本机的ip之和作为workId的初始值
-     * 2.将workId和datacenterId作为配置传入
-     * 3.此处我们不配置这些 通过ZK的特性直接create节点（/#{root}/#{index}） 做%运算计算得出workId和datacenterId
+     * 总结：
+       保证datacenterId 和workId的组合不要出现 相同值就行
+
+     * 1.改进sj的id生成
+     * 也可考虑使用jdbc-sharding中关于idkey的生成 使用本机的ip之和作为workId的初始值
+     *  datacenterId作为配置传入，然后workId直接用本机IP取和计算（同一个机房C类地址 IP取和不存在相同的数值）
+     *
+     * 2.此处我们不配置这些 通过ZK的特性直接create节点（/#{root}/#{index}） 做%运算计算得出workId和datacenterId
      */
     @ConfigurationProperties(prefix = "id.generator.zookeeper")
     public static class IdGeneratorZookeeperProperties {
